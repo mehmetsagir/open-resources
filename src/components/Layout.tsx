@@ -3,13 +3,11 @@ import styled from 'styled-components';
 
 type Props = {
   children: React.ReactNode;
-}
+};
 
 const Layout: React.FC<Props> = ({ children }) => (
   <StyledThemeProvider>
-    <Container>
-      {children}
-    </Container>
+    <Container>{children}</Container>
   </StyledThemeProvider>
 );
 

@@ -6,7 +6,7 @@ import defaultTheme from './theme';
 
 type Props = {
   children: ReactNode;
-}
+};
 
 const StyledThemeProvider: React.FC<Props> = ({ children }) => (
   <Provider theme={defaultTheme}>
