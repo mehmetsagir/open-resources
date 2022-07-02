@@ -14,7 +14,6 @@ const Layout: React.FC<Props> = ({ children }) => (
 const Container = styled.div`
   max-width: 1000px;
   margin: 0 auto;
-  padding: 32px 0;
 
   @media (max-width: 1000px) {
     max-width: 100%;
