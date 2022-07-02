@@ -1,14 +1,38 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import SearchSvg from '/public/svg/search.svg';
 
+import Modal from './Modal';
+import SearchModalContent from './SearchModalContent';
+
 const Header = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+      if (
+        (e.metaKey || e.altKey) &&
+        e.key === 'k' &&
+        e.defaultPrevented === false
+      ) {
+        setShowModal(true);
+      }
+      if (e.key === 'Escape') {
+        setShowModal(false);
+      }
+    });
+  }, []);
+
   return (
     <Container>
       <h3>RepoHunter</h3>
-      <button>
+      <button onClick={() => setShowModal(true)}>
         <SearchSvg />
       </button>
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
+        <SearchModalContent />
+      </Modal>
     </Container>
   );
 };
