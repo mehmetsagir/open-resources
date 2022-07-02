@@ -1,13 +1,18 @@
 import StyledThemeProvider from 'src/styles/ThemeProvider';
 import styled from 'styled-components';
 
+import Header from './Header';
+
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout: React.FC<Props> = ({ children }) => (
   <StyledThemeProvider>
-    <Container>{children}</Container>
+    <Container>
+      <Header />
+      {children}
+    </Container>
   </StyledThemeProvider>
 );
 
