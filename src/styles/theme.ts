@@ -1,8 +1,6 @@
-const defaultColor = '#121212';
-
 const theme = {
   colors: {
-    bg: defaultColor,
+    bg: 'rgb(18, 18, 18)',
     text: '#fff',
   },
   fontFamily:
