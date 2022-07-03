@@ -22,22 +22,24 @@ const RepoCard: React.FC<Props> = ({ repo }) => (
   <Container>
     <div className="title">
       <GithubRepoIcon />
-      <a href={repo.link} target="_blank" rel="noreferrer">
+      <a href={repo.link} target="_blank" rel="noreferrer" title={repo.repo}>
         {repo.repo}
       </a>
     </div>
     <p className="description">{repo.description}</p>
     <div className="info">
-      <div>
-        <span
-          className="language-color"
-          style={{
-            // @ts-ignore
-            backgroundColor: repoLanguageColor[repo.language],
-          }}
-        />
-        <span>{repo.language}</span>
-      </div>
+      {repo.language && (
+        <div>
+          <span
+            className="language-color"
+            style={{
+              // @ts-ignore
+              backgroundColor: repoLanguageColor[repo.language] || '#ccc',
+            }}
+          />
+          <span>{repo.language}</span>
+        </div>
+      )}
       {repo.stars > 0 && (
         <a href={`${repo.link}/stargazers`} target="_blank" rel="noreferrer">
           <GithubStarIcon />
@@ -74,6 +76,7 @@ export const Container = styled.div`
     gap: 6px;
 
     a {
+      flex: 1;
       font-size: 14px;
       color: rgb(89, 166, 255);
       &:hover {
