@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -26,12 +27,14 @@ const Header = () => {
 
   return (
     <Container>
-      <h3>RepoHunter</h3>
+      <Link href="/">
+        <a>RepoHunter</a>
+      </Link>
       <button onClick={() => setShowModal(true)}>
         <SearchSvg />
       </button>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
-        <SearchModalContent />
+        <SearchModalContent onClose={() => setShowModal(false)} />
       </Modal>
     </Container>
   );
@@ -43,7 +46,7 @@ const Container = styled.header`
   align-content: center;
   justify-content: space-between;
 
-  h3 {
+  a {
     font-size: 24px;
     font-weight: 600;
     color: #ccc;
