@@ -1,10 +1,13 @@
 import { NextPage } from 'next';
+
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
+import NumberFormat from 'react-number-format';
 
 import RepoCard from '../components/RepoCard';
 import useSearch from '../hooks/useSearch';
+import Count from '../components/Count';
 
 const Results: NextPage = () => {
   const [totalItems, setTotalItems] = useState(0);
@@ -54,19 +57,7 @@ const Results: NextPage = () => {
         <h1>
           Search results for <b>{q}</b>
         </h1>
-        <p>
-          {totalItems > 0 ? (
-            <>
-              Found&nbsp;
-              <b>
-                {page * 30} / {totalItems}
-              </b>
-              &nbsp;results
-            </>
-          ) : (
-            'No results'
-          )}
-        </p>
+        <Count page={page} value={totalItems} />
       </div>
       <div className="repos">
         {data?.map((item: any) => (
@@ -74,9 +65,7 @@ const Results: NextPage = () => {
         ))}
       </div>
       <div className="load-more">
-        <p>
-          Total <b>{page * 30}</b> / <b>{totalItems}</b> repos
-        </p>
+        <Count page={page} value={totalItems} />
         <button
           disabled={isLoading}
           onClick={() => {
