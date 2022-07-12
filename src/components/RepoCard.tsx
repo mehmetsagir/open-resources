@@ -1,3 +1,4 @@
+import NumberFormat from 'react-number-format';
 import styled from 'styled-components';
 
 import repoLanguageColor from '/public/assets/repo-language-color.json';
@@ -16,10 +17,11 @@ type Repo = {
 
 type Props = {
   repo: Repo;
+  maxHeight?: boolean;
 };
 
-const RepoCard: React.FC<Props> = ({ repo }) => (
-  <Container>
+const RepoCard: React.FC<Props> = ({ repo, maxHeight }) => (
+  <Container className={maxHeight ? 'max' : ''}>
     <div className="title">
       <GithubRepoIcon />
       <a href={repo.link} target="_blank" rel="noreferrer" title={repo.repo}>
@@ -43,7 +45,13 @@ const RepoCard: React.FC<Props> = ({ repo }) => (
       {repo.stars > 0 && (
         <a href={`${repo.link}/stargazers`} target="_blank" rel="noreferrer">
           <GithubStarIcon />
-          <span>{repo.stars}</span>
+          <span>
+            <NumberFormat
+              value={repo.stars}
+              displayType="text"
+              thousandSeparator
+            />
+          </span>
         </a>
       )}
       {repo.forks > 0 && (
@@ -53,7 +61,13 @@ const RepoCard: React.FC<Props> = ({ repo }) => (
           rel="noreferrer"
         >
           <GithubForkIcon />
-          <span>{repo.forks}</span>
+          <span>
+            <NumberFormat
+              value={repo.forks}
+              displayType="text"
+              thousandSeparator
+            />
+          </span>
         </a>
       )}
     </div>
@@ -69,6 +83,12 @@ export const Container = styled.div`
   border-radius: 6px;
   line-height: 1.5;
   color: rgba(204, 204, 204, 0.6);
+  height: 100%;
+
+  &.max {
+    min-height: 150px;
+    max-height: 150px;
+  }
 
   .title {
     display: flex;
@@ -89,6 +109,11 @@ export const Container = styled.div`
     margin-top: 8px;
     font-size: 12px;
     color: inherit;
+
+    max-height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .info {
     display: flex;
