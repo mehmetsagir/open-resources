@@ -1,9 +1,8 @@
 import { NextPage } from 'next';
 
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
 
 import RepoCard from '../components/RepoCard';
 import useSearch from '../hooks/useSearch';
@@ -17,13 +16,12 @@ const Results: NextPage = () => {
 
   const router = useRouter();
 
-  const { q, codeRequired } = router.query;
+  const { q } = router.query;
 
   useSearch({
     type: 'repositories',
     searchText: typeof q === 'string' ? q : undefined,
-    codeRequired:
-      typeof codeRequired === 'string' ? Boolean(codeRequired) : undefined,
+    codeRequired: true,
     enabled: !!q,
     params: {
       page,
@@ -48,6 +46,10 @@ const Results: NextPage = () => {
       alert(err?.message);
     },
   });
+
+  useEffect(() => {
+    setData([]);
+  }, [q]);
 
   if (isLoading) null;
 
