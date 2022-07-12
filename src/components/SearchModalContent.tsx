@@ -1,7 +1,13 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const SearchModalContent: React.FC = () => {
+type Props = {
+  onClose: () => void;
+};
+
+const SearchModalContent: React.FC<Props> = ({ onClose }) => {
+  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -10,10 +16,22 @@ const SearchModalContent: React.FC = () => {
     });
   }, []);
 
+  const handleSearch = (e: any) => {
+    if (e.key === 'Enter') {
+      router.push(`/results?q=${e.target.value}`);
+      onClose();
+    }
+  };
+
   return (
     <Container>
       <div className="input-box">
-        <input type="text" placeholder="Type to search" ref={inputRef} />
+        <input
+          type="text"
+          placeholder="Type to search"
+          onKeyDown={handleSearch}
+          ref={inputRef}
+        />
         <span>ESC</span>
       </div>
     </Container>
