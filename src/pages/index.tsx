@@ -10,7 +10,7 @@ const Home: NextPage = () => {
     languages[Math.floor(Math.random() * languages.length)];
 
   useEffect(() => {
-    router.push(`/results?q=${selectedLanguage}`);
+    router.push(`/results?q=${selectedLanguage}&sort=stars&order=desc`);
   }, []);
 
   return null;
