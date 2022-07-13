@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -6,7 +5,6 @@ import SearchSvg from '/public/svg/search.svg';
 
 import Modal from './Modal';
 import SearchModalContent from './SearchModalContent';
-
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -27,9 +25,7 @@ const Header = () => {
 
   return (
     <Container>
-      <Link href="/">
-        <a>RepoHunter</a>
-      </Link>
+      <h1>RepoHunter</h1>
       <button onClick={() => setShowModal(true)}>
         <SearchSvg />
       </button>
@@ -46,7 +42,7 @@ const Container = styled.header`
   align-content: center;
   justify-content: space-between;
 
-  a {
+  h1 {
     font-size: 24px;
     font-weight: 600;
     color: #ccc;
