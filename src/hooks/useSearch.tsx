@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { Order, Sort } from '../types/search';
 
 type Type = 'repositories';
@@ -52,7 +53,7 @@ const useSearch: React.FC<Props> = ({
       const data = await fetch(`${baseURL}?${params.toString()}`);
       const json = await data.json();
 
-      if (codeRequired) {
+      if (codeRequired && json.items.length > 0) {
         json.items = json.items.filter((item: any) => item.language);
       }
 
