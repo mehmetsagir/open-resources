@@ -116,7 +116,7 @@ const Container = styled.div`
   .repos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+    gap: 12px;
   }
   .load-more {
     display: flex;
