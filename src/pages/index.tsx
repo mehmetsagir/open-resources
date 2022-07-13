@@ -22,14 +22,6 @@ const Home: NextPage = () => {
 
   const { q } = router.query;
 
-  // useEffect(() => {
-  //   if (typeof q === 'string') {
-  //     setSearchText(q);
-  //     return;
-  //   }
-  //   setSearchText(selectedLanguage);
-  // }, [q]);
-
   useEffect(() => {
     if (typeof q === 'string') {
       setSearchText(q);
