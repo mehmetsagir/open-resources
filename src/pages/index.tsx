@@ -23,6 +23,7 @@ const Home: NextPage = () => {
   const { q } = router.query;
 
   useEffect(() => {
+    setData([]);
     if (typeof q === 'string') {
       setSearchText(q);
       return;
@@ -56,10 +57,6 @@ const Home: NextPage = () => {
       setIsLoading(false);
     },
   });
-
-  useEffect(() => {
-    setData([]);
-  }, [q]);
 
   if (isLoading) null;
   return (
