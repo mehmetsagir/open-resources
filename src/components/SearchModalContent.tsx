@@ -18,7 +18,7 @@ const SearchModalContent: React.FC<Props> = ({ onClose }) => {
 
   const handleSearch = (e: any) => {
     if (e.key === 'Enter') {
-      router.push(`/results?q=${e.target.value}`);
+      router.push(`/?q=${e.target.value}`);
       onClose();
     }
   };
