@@ -24,13 +24,14 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setData([]);
+    setPage(1);
     if (typeof q === 'string') {
       setSearchText(q);
       return;
     }
-    setSearchText(selectedLanguage);
+    setSearchText(selectedLanguage.toLowerCase());
     router.push(`/?q=${selectedLanguage.toLowerCase()}&sort=stars&order=desc`);
-  }, [q]);
+  }, [q, router]);
 
   useSearch({
     type: 'repositories',
@@ -72,18 +73,20 @@ const Home: NextPage = () => {
           <RepoCard key={item.repo} repo={item} />
         ))}
       </div>
-      <div className="load-more">
-        <Count page={page} value={totalItems} />
-        <button
-          disabled={isLoading}
-          onClick={() => {
-            setIsLoading(true);
-            setPage(page + 1);
-          }}
-        >
-          Load More
-        </button>
-      </div>
+      {totalItems > 30 && (
+        <div className="load-more">
+          <Count page={page} value={totalItems} />
+          <button
+            disabled={isLoading}
+            onClick={() => {
+              setIsLoading(true);
+              setPage(page + 1);
+            }}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </Container>
   );
 };
