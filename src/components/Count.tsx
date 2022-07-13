@@ -13,7 +13,7 @@ const Count: React.FC<Props> = ({ value, page }) => {
           Found&nbsp;
           <b>
             <NumberFormat
-              value={page * 30}
+              value={value <= page * 30 ? value : page * 30}
               displayType="text"
               thousandSeparator
             />
