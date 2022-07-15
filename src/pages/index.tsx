@@ -1,9 +1,11 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import ContentLoader from 'react-content-loader';
 import styled from 'styled-components';
 
 import Count from '../components/Count';
+import ReposLoader from '../components/Loaders/RepoCard';
 import RepoCard from '../components/RepoCard';
 import useSearch from '../hooks/useSearch';
 
@@ -59,19 +61,32 @@ const Home: NextPage = () => {
     },
   });
 
-  if (isLoading) null;
   return (
     <Container>
       <div className="header">
         <h1>
           Search results for <b>{searchText}</b>
         </h1>
-        <Count page={page} value={totalItems} />
+        {isLoading ? (
+          <ContentLoader
+            speed={2}
+            width="190px"
+            height={20}
+            backgroundColor="#2c2c2c"
+            foregroundColor="#121212"
+          >
+            <rect x="0" y="0" rx="4" ry="4" width="190px" height="20px" />
+          </ContentLoader>
+        ) : (
+          <Count page={page} value={totalItems} />
+        )}
       </div>
       <div className="repos">
-        {data?.map((item: any) => (
-          <RepoCard key={item.repo} repo={item} />
-        ))}
+        {isLoading ? (
+          <ReposLoader />
+        ) : (
+          data?.map((item: any) => <RepoCard key={item.repo} repo={item} />)
+        )}
       </div>
       {totalItems > 30 && (
         <div className="load-more">
