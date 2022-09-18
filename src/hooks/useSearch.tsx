@@ -50,14 +50,14 @@ const useSearch: React.FC<Props> = ({
 
   const handleSearch = async () => {
     try {
-      const data = await fetch(`${baseURL}?${params.toString()}`);
-      const json = await data.json();
+      const response = await fetch(`${baseURL}?${params.toString()}`);
+      const data = await response.json();
 
-      if (codeRequired && json.items.length > 0) {
-        json.items = json.items.filter((item: any) => item.language);
+      if (codeRequired && data.items?.length > 0) {
+        data.items = data.items.filter((item: any) => item.language);
       }
 
-      onSuccess(json);
+      onSuccess(data);
     } catch (err) {
       onError?.(err);
     }
