@@ -82,11 +82,10 @@ const Home: NextPage = () => {
         )}
       </div>
       <div className="repos">
-        {isLoading ? (
-          <ReposLoader />
-        ) : (
-          data?.map((item: any) => <RepoCard key={item.repo} repo={item} />)
-        )}
+        {isLoading && <ReposLoader />}
+        {data?.map((item: any) => (
+          <RepoCard key={item.repo} repo={item} />
+        ))}
       </div>
       {totalItems > 30 && (
         <div className="load-more">
